@@ -15,12 +15,15 @@
  * limitations under the License.
  */
 
-package com.google.example.gms.nativeadvancedexample;
+package com.wbelbolq.hamza.gms.goole;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -40,20 +43,23 @@ import com.google.android.gms.ads.VideoController;
 import com.google.android.gms.ads.VideoOptions;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.ads.nativead.MediaView;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.ads.nativead.NativeAdView;
+
 import java.util.Locale;
-import android.view.View;
-import android.widget.Button;
-import android.content.Intent;
+
 import android.provider.Settings;
+
 /**
  * A simple activity class that displays native ad formats.
  */
 @SuppressLint("SetTextI18n")
 public class MainActivity extends AppCompatActivity {
+    private InterstitialAd mInterstitialAd;
 
     private static final String ADMOB_AD_UNIT_ID = "ca-app-pub-3940256099942544/2247696110";
     private static final String TAG = "MainActivity";
@@ -64,26 +70,65 @@ public class MainActivity extends AppCompatActivity {
     private NativeAd nativeAd;
     private Button buttonManeul;
     private Button buttonPolicy;
+    private Button buttonLink;
+    protected void onResume() {
+        super.onResume();
+        showInterstitialAd();
+        // Perform actions when the activity is shown
 
+        // For example, show a toast message
+
+
+        // Or start a background task, update UI, etc.
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        Log.i("TAG", "onAdLoaded");
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.d("TAG", loadAdError.toString());
+                        mInterstitialAd = null;
+                    }
+                });
+
+
+    // Call this method when you want to show the interstitial ad
+
         buttonManeul = findViewById(R.id.button2);
         buttonManeul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the second activity
+                showInterstitialAd();
                 Intent intent = new Intent(MainActivity.this, Maneul.class);
                 startActivity(intent);
+                showInterstitialAd();
             }
         });
         Button button1 = findViewById(R.id.button1);
         button1.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
+                showInterstitialAd();
                 Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
                 startActivity(intent);
+                showInterstitialAd();
             }
         });
         buttonPolicy = findViewById(R.id.button3);
@@ -91,8 +136,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the second activity
+                showInterstitialAd();
                 Intent intent = new Intent(MainActivity.this, Privacypolicy.class);
                 startActivity(intent);
+                showInterstitialAd();
+            }
+        });
+        buttonLink  = findViewById(R.id.button4);
+        buttonLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Perform your desired action here
+                // For example, open a website
+                showInterstitialAd();
+                String url = "https://www.youtube.com/watch?v=fhshk0_baJI&t=264s";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+                showInterstitialAd();
             }
         });
         // Log the Mobile Ads SDK version.
@@ -311,5 +371,12 @@ public class MainActivity extends AppCompatActivity {
             nativeAd.destroy();
         }
         super.onDestroy();
+    }
+    private void showInterstitialAd() {
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(this);
+        } else {
+            Log.d("TAG", "The interstitial ad wasn't loaded yet.");
+        }
     }
 }

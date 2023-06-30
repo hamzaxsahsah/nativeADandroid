@@ -1,13 +1,14 @@
-package com.google.example.gms.nativeadvancedexample;
+package com.wbelbolq.hamza.gms.goole;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-public class Maneul extends Activity {
+
+public class Privacypolicy extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.maneul);
+        setContentView(R.layout.privacypolicy);
 
 
     }

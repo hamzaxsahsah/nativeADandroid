@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'com.google.example.gms.nativeadvancedexample'
+    namespace 'com.wbelbolq.hamza.gms.goole'
     compileSdkVersion 33
     defaultConfig {
-        applicationId "com.google.example.gms.nativeadvancedexample"
+        applicationId "com.wbelbolq.hamza.gms.goole"
         minSdkVersion 19
         targetSdkVersion 33
         versionCode 1
