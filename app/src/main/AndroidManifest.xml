@@ -28,5 +28,9 @@
             android:name=".Maneul">
 
         </activity>
+        <activity
+            android:name=".Privacypolicy">
+
+        </activity>
     </application>
 </manifest>

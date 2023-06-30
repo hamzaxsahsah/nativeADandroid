@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView videoStatus;
     private NativeAd nativeAd;
     private Button buttonManeul;
+    private Button buttonPolicy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
+                startActivity(intent);
+            }
+        });
+        buttonPolicy = findViewById(R.id.button3);
+        buttonPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the second activity
+                Intent intent = new Intent(MainActivity.this, Privacypolicy.class);
                 startActivity(intent);
             }
         });
