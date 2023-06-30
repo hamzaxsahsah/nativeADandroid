@@ -36,6 +36,7 @@ public class Maneul extends AppCompatActivity {
                         // The mInterstitialAd reference will be null until
                         // an ad is loaded.
                         mInterstitialAd = interstitialAd;
+
                         Log.i("TAG", "onAdLoaded");
                     }
 

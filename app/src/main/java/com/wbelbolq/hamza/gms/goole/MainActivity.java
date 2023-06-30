@@ -71,9 +71,29 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonManeul;
     private Button buttonPolicy;
     private Button buttonLink;
+    public  boolean  showaddlink ;
+
     protected void onResume() {
         super.onResume();
         showInterstitialAd();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        if (showaddlink){
+            InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest,
+                    new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            // The mInterstitialAd reference will be null until
+                            // an ad is loaded.
+                            mInterstitialAd = interstitialAd;
+                            Log.i("TAG", "onAdLoaded");
+                        }
+
+
+
+
+                    });
+        }
+
         // Perform actions when the activity is shown
 
         // For example, show a toast message
@@ -97,12 +117,9 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("TAG", "onAdLoaded");
                     }
 
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.d("TAG", loadAdError.toString());
-                        mInterstitialAd = null;
-                    }
+
+
+
                 });
 
 
@@ -113,10 +130,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the second activity
-                showInterstitialAd();
-                Intent intent = new Intent(MainActivity.this, Maneul.class);
-                startActivity(intent);
-                showInterstitialAd();
+                if (showaddlink){
+                    showInterstitialAd();
+                    showaddlink = false ;
+                }else{
+                    Intent intent = new Intent(MainActivity.this, Maneul.class);
+                    startActivity(intent);
+                    showaddlink = true ;
+                }
+
+
+
             }
         });
         Button button1 = findViewById(R.id.button1);
@@ -125,10 +149,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                showInterstitialAd();
-                Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
-                startActivity(intent);
-                showInterstitialAd();
+                if (showaddlink){
+                    showInterstitialAd();
+                    showaddlink = false ;
+                }else{
+                    Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
+                    startActivity(intent);
+                    showaddlink = true ;
+
+                }
+
+
             }
         });
         buttonPolicy = findViewById(R.id.button3);
@@ -136,27 +167,44 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the second activity
-                showInterstitialAd();
-                Intent intent = new Intent(MainActivity.this, Privacypolicy.class);
-                startActivity(intent);
-                showInterstitialAd();
+                if (showaddlink){
+                    showInterstitialAd();
+                    showaddlink = false ;
+                }else{
+                    Intent intent = new Intent(MainActivity.this, Privacypolicy.class);
+                    startActivity(intent);
+                    showaddlink = true ;
+
+                }
+
             }
         });
+        showaddlink = true ;
         buttonLink  = findViewById(R.id.button4);
         buttonLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Perform your desired action here
                 // For example, open a website
-                showInterstitialAd();
-                String url = "https://www.youtube.com/watch?v=fhshk0_baJI&t=264s";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-                showInterstitialAd();
+                if (showaddlink){
+                    showInterstitialAd();
+                    showaddlink = false ;
+                }
+                else {
+                    String url = "https://www.youtube.com/watch?v=fhshk0_baJI&t=264s";
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                    showaddlink = true ;
+
+                }
+
+
+
+
             }
         });
         // Log the Mobile Ads SDK version.
-        Log.d(TAG, "Google Mobile Ads SDK Version: " + MobileAds.getVersion());
+        Log.d(TAG, "Google Mobile Ads SDK Version: " );
 
         // Initialize the Mobile Ads SDK.
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
