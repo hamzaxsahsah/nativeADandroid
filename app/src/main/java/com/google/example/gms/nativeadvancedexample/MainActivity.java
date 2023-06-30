@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2015 Google, Inc.
  *
@@ -17,6 +18,7 @@
 package com.google.example.gms.nativeadvancedexample;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +45,10 @@ import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.ads.nativead.NativeAdView;
 import java.util.Locale;
-
+import android.view.View;
+import android.widget.Button;
+import android.content.Intent;
+import android.provider.Settings;
 /**
  * A simple activity class that displays native ad formats.
  */
@@ -57,12 +62,29 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox startVideoAdsMuted;
     private TextView videoStatus;
     private NativeAd nativeAd;
+    private Button buttonManeul;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        buttonManeul = findViewById(R.id.button2);
+        buttonManeul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the second activity
+                Intent intent = new Intent(MainActivity.this, Maneul.class);
+                startActivity(intent);
+            }
+        });
+        Button button1 = findViewById(R.id.button1);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
+                startActivity(intent);
+            }
+        });
         // Log the Mobile Ads SDK version.
         Log.d(TAG, "Google Mobile Ads SDK Version: " + MobileAds.getVersion());
 
