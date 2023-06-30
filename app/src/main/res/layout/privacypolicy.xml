@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tutlane.admobexample.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="PS5 Phone Connect is an Android app that allows seamless connection between your phone and PlayStation 5 console. This comprehensive manual provides step-by-step instructions on connecting your phone to the console, installing the app, and utilizing its features. The app requires an Android phone running Android 6.0 or later, a stable Wi-Fi network, and a PlayStation 5 console. Once installed, the app offers features like remote play, second screen functionality, chat and voice communication, and system controls. It collects personal information, such as name and contact details, for registration and support purposes, and anonymous usage information to improve app performance. The app prioritizes data security and implements industry-standard measures. It may integrate with third-party services, and a privacy policy outlines the data practices. The app is not intended for children under 13. The manual concludes with troubleshooting tips, updating the privacy policy, and providing contact information for inquiries."
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </ScrollView>
+</LinearLayout>
